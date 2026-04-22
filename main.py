@@ -20,3 +20,16 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/")
 def index():
     return FileResponse("static/index.html")
+
+@app.get("/api/health")
+def health():
+    return {"status": "ok"}
+
+@app.get("/api/dbtest")
+def dbtest():
+    import database, os
+    try:
+        result = database.query("SELECT 1 AS ok")
+        return {"db": "connected", "result": result}
+    except Exception as e:
+        return {"db": "error", "detail": str(e)}
