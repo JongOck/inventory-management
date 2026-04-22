@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>재고수불현황 관리 시스템</title>
+  <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31/dist/ag-grid-community.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31/styles/ag-grid.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31/styles/ag-theme-alpine.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="header">
+  <span class="title">경영지원본부 재고수불현황</span>
+  <span class="version">V.25-07-07 (Web)</span>
+</div>
+
+<!-- 탭 메뉴 -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('tab0')">재고수불</button>
+  <button class="tab-btn" onclick="showTab('tab1')">창고재고실사</button>
+  <button class="tab-btn" onclick="showTab('tab2')">양품출고</button>
+  <button class="tab-btn" onclick="showTab('tab3')">입고현황</button>
+  <button class="tab-btn" onclick="showTab('tab4')">출하현황</button>
+  <button class="tab-btn" onclick="showTab('tab5')">매입영수증</button>
+  <button class="tab-btn" onclick="showTab('tab6')">재고원장</button>
+  <button class="tab-btn" onclick="showTab('tab7')">재고평가</button>
+  <button class="tab-btn" onclick="showTab('tab8')">인센티브</button>
+</div>
+
+<!-- 공통 컨트롤 바 -->
+<div class="control-bar">
+  <label>기준월:
+    <input type="month" id="work-month" value="">
+  </label>
+  <button class="btn-primary" onclick="loadCurrentTab()">조회</button>
+  <button class="btn-excel" onclick="exportExcel()">Excel 다운로드</button>
+  <input type="text" id="search-input" placeholder="검색어 입력..." oninput="filterGrid()">
+  <span id="row-count" class="row-count"></span>
+</div>
+
+<!-- 탭 컨텐츠 -->
+<div id="tab0" class="tab-content active">
+  <div id="grid0" class="ag-theme-alpine grid-container"></div>
+</div>
+<div id="tab1" class="tab-content">
+  <div id="grid1" class="ag-theme-alpine grid-container"></div>
+</div>
+<div id="tab2" class="tab-content">
+  <div id="grid2" class="ag-theme-alpine grid-container"></div>
+</div>
+<div id="tab3" class="tab-content">
+  <div id="grid3" class="ag-theme-alpine grid-container"></div>
+</div>
+<div id="tab4" class="tab-content">
+  <div id="grid4" class="ag-theme-alpine grid-container"></div>
+</div>
+<div id="tab5" class="tab-content">
+  <div id="grid5" class="ag-theme-alpine grid-container"></div>
+</div>
+<div id="tab6" class="tab-content">
+  <div id="grid6" class="ag-theme-alpine grid-container"></div>
+</div>
+<div id="tab7" class="tab-content">
+  <div id="grid7" class="ag-theme-alpine grid-container"></div>
+</div>
+<div id="tab8" class="tab-content">
+  <div id="grid8" class="ag-theme-alpine grid-container"></div>
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

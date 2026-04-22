@@ -1,0 +1,65 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Malgun Gothic', sans-serif; font-size: 13px; background: #f0f2f5; }
+
+.header {
+  background: #1a3a5c;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header .title { font-size: 16px; font-weight: bold; }
+.header .version { font-size: 11px; color: #aac4e0; }
+
+.tab-bar {
+  background: #2c5282;
+  display: flex;
+  gap: 2px;
+  padding: 6px 10px 0;
+}
+.tab-btn {
+  background: #3a6da8;
+  color: #cce0f5;
+  border: none;
+  padding: 7px 16px;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  font-size: 12px;
+  font-family: 'Malgun Gothic', sans-serif;
+}
+.tab-btn:hover { background: #4a85c8; color: white; }
+.tab-btn.active { background: #f0f2f5; color: #1a3a5c; font-weight: bold; }
+
+.control-bar {
+  background: white;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
+}
+.control-bar label { font-size: 12px; display: flex; align-items: center; gap: 4px; }
+.control-bar input[type="month"] { padding: 4px 8px; border: 1px solid #ccc; border-radius: 3px; font-size: 12px; }
+.control-bar input[type="text"] { padding: 4px 8px; border: 1px solid #ccc; border-radius: 3px; font-size: 12px; width: 200px; }
+
+.btn-primary { background: #2b6cb0; color: white; border: none; padding: 5px 14px; border-radius: 3px; cursor: pointer; font-size: 12px; }
+.btn-primary:hover { background: #2c5282; }
+.btn-excel { background: #276749; color: white; border: none; padding: 5px 14px; border-radius: 3px; cursor: pointer; font-size: 12px; }
+.btn-excel:hover { background: #1c4532; }
+.row-count { font-size: 11px; color: #666; margin-left: auto; }
+
+.tab-content { display: none; height: calc(100vh - 110px); }
+.tab-content.active { display: block; }
+.grid-container { width: 100%; height: 100%; }
+
+.ag-theme-alpine {
+  --ag-font-family: 'Malgun Gothic', sans-serif;
+  --ag-font-size: 12px;
+  --ag-row-height: 24px;
+  --ag-header-height: 28px;
+}
+.ag-theme-alpine .ag-row-even { background-color: #ffffff; }
+.ag-theme-alpine .ag-row-odd  { background-color: #f7fafc; }
+.ag-theme-alpine .ag-row:hover { background-color: #ebf4ff !important; }
