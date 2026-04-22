@@ -10,6 +10,8 @@ DB_CONFIG = {
     "user": os.environ.get("DB_USER", "postgres"),
     "password": os.environ.get("DB_PASSWORD", ""),
     "port": int(os.environ.get("DB_PORT", "5432")),
+    "ssl_context": False,  # SSL 비활성화
+    "timeout": 10,         # 10초 타임아웃
 }
 
 def query(sql: str, params: tuple = None) -> list[dict]:
