@@ -5,6 +5,6 @@ from typing import Optional
 router = APIRouter()
 
 @router.get("/")
-async def get_purchase(work_month: Optional[str] = Query(None)):
-    sql = "SELECT * FROM purchase_receipt_status WHERE TO_CHAR(receipt_date, 'YYYY-MM') = $1 ORDER BY receipt_date"
-    return await query(sql, (work_month,))
+def get_purchase(work_month: Optional[str] = Query(None)):
+    sql = "SELECT * FROM purchase_receipt_status WHERE TO_CHAR(receipt_date, 'YYYY-MM') = %s ORDER BY receipt_date"
+    return query(sql, (work_month,))

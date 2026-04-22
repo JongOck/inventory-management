@@ -5,7 +5,7 @@ from typing import Optional
 router = APIRouter()
 
 @router.get("/")
-async def get_inventory(work_month: Optional[str] = Query(None)):
+def get_inventory(work_month: Optional[str] = Query(None)):
     month = work_month or ""
     year = month[:4] if len(month) >= 4 else ""
     sql = """
@@ -16,7 +16,7 @@ async def get_inventory(work_month: Optional[str] = Query(None)):
             outgoing_unit_price, outgoing_quantity, outgoing_amount,
             current_unit_price, current_quantity, current_amount
         FROM mds_basic_data
-        WHERE reference_year = $1
+        WHERE reference_year = %s
         ORDER BY item_code
     """
-    return await query(sql, (year,))
+    return query(sql, (year,))

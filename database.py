@@ -1,31 +1,32 @@
 import os
-import asyncpg
+import pg8000.dbapi
 from dotenv import load_dotenv
 
 load_dotenv()
 
 DB_CONFIG = {
+    "host": os.environ.get("DB_HOST", "foodall.co.kr"),
     "database": os.environ.get("DB_NAME", "ecommerce"),
     "user": os.environ.get("DB_USER", "postgres"),
     "password": os.environ.get("DB_PASSWORD", ""),
-    "host": os.environ.get("DB_HOST", "foodall.co.kr"),
     "port": int(os.environ.get("DB_PORT", "5432")),
 }
 
-async def query(sql: str, params: tuple = None) -> list[dict]:
-    conn = await asyncpg.connect(**DB_CONFIG)
+def query(sql: str, params: tuple = None) -> list[dict]:
+    conn = pg8000.dbapi.connect(**DB_CONFIG)
     try:
-        rows = await conn.fetch(sql, *params) if params else await conn.fetch(sql)
-        return [dict(row) for row in rows]
+        cur = conn.cursor()
+        cur.execute(sql, params or ())
+        cols = [d[0] for d in cur.description]
+        return [dict(zip(cols, row)) for row in cur.fetchall()]
     finally:
-        await conn.close()
+        conn.close()
 
-async def execute(sql: str, params: tuple = None):
-    conn = await asyncpg.connect(**DB_CONFIG)
+def execute(sql: str, params: tuple = None):
+    conn = pg8000.dbapi.connect(**DB_CONFIG)
     try:
-        if params:
-            await conn.execute(sql, *params)
-        else:
-            await conn.execute(sql)
+        cur = conn.cursor()
+        cur.execute(sql, params or ())
+        conn.commit()
     finally:
-        await conn.close()
+        conn.close()
