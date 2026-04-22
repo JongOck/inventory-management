@@ -1,0 +1,8 @@
+.env
+config_msd.ini
+__pycache__/
+*.pyc
+*.pyo
+dist/
+build/
+*.spec
