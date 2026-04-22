@@ -6,5 +6,6 @@ router = APIRouter()
 
 @router.get("/")
 def get_incoming(work_month: Optional[str] = Query(None)):
-    sql = "SELECT * FROM purchase_receipt_status WHERE TO_CHAR(receipt_date, 'YYYY-MM') = %s ORDER BY receipt_date"
-    return query(sql, (work_month,))
+    month_fmt = f"{work_month[:4]}/{work_month[4:6]}" if work_month and len(work_month) >= 6 else ""
+    sql = "SELECT * FROM mds_purchase_receipt_status WHERE reference_month = %s ORDER BY item_code"
+    return query(sql, (month_fmt,))

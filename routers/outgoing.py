@@ -6,5 +6,6 @@ router = APIRouter()
 
 @router.get("/")
 def get_outgoing(work_month: Optional[str] = Query(None)):
-    sql = "SELECT * FROM shipment_status WHERE TO_CHAR(shipment_date, 'YYYY-MM') = %s ORDER BY shipment_date"
-    return query(sql, (work_month,))
+    month_fmt = f"{work_month[:4]}/{work_month[4:6]}" if work_month and len(work_month) >= 6 else ""
+    sql = "SELECT * FROM mds_shipment_status WHERE reference_month = %s ORDER BY item_code"
+    return query(sql, (month_fmt,))
